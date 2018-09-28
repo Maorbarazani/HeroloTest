@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
       newGenre == "" || newGenre == undefined ||
       newDirector == "" || newDirector == undefined
     ) {
-      this.openSnackBar('Invalid movie title; Changes were NOT saved', null)
+      this.openSnackBar('All fields are required; Changes were NOT saved', null)
       return;
     }
     if (this.titleAlreadyExist(-1, newTitle)) {
