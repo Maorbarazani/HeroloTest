@@ -1,0 +1,176 @@
+<br>
+<div class="container">
+
+
+  <!-- Search -->
+  <div class="container">
+    <div class="row">
+      <small id="searchHelp" class="form-text text-muted">* Searching for movies will <b>undo</b> any additions
+        or changes you've made!</small>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3"><i class="material-icons">search</i></span>
+        </div>
+        <input #search type="text" class="form-control" aria-describedby="searchHelp" placeholder="Search Movies By Title"
+          (keyup.enter)="getMoviesByTitle(search.value)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Movie -->
+  <button type="button" class="btn btn-light" matTooltip="Create a new movie" data-toggle="modal" data-target="#addModal">
+    <mat-icon>library_add</mat-icon> Add Movie
+  </button>
+
+  <!-- Add Movie Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="Add Movie" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="Edit Movie">Be a producer, create your own movie:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Title</span>
+            </div>
+            <input #newTitle1 type="text" class="form-control" placeholder="The title is everything!">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Year</span>
+            </div>
+            <input #newYear1 type="number" class="form-control" placeholder="Be reasonable..">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Runtime</span>
+            </div>
+            <input #newRuntime1 type="text" class="form-control" placeholder="How long is it?">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Genre</span>
+            </div>
+            <input #newGenre1 type="text" class="form-control" placeholder="e.g. Action, Horror..">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Director</span>
+            </div>
+            <input #newDirector1 type="text" class="form-control" placeholder="And the Oscar goes to..">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="createMovie(newTitle1.value, newYear1.value, newRuntime1.value, newGenre1.value, newDirector1.value)">Add
+            Movie</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let movie of movieList" class="col-md-3">
+      <!--Cards-->
+      <div class="card ">
+        <div class="card-body">
+          <h4 class="card-title" style="text-align: center"><b>{{movie.title | titlecase | removeSpecialChars}}</b></h4>
+          <hr>
+          <p class="card-text"><b>Year: </b>{{movie.year}}</p>
+          <p class="card-text"><b>Runtime: </b>{{movie.runtime}}</p>
+          <p class="card-text"><b>Genre: </b>{{movie.genre}}</p>
+          <p class="card-text"><b>Directed By: </b>{{movie.director}}</p>
+          <div class="row">
+
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#editModal" (click)="selectMovieToEdit(movie.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#deleteModal" (click)="selectMovieToEdit(movie.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="Edit Movie" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="Edit Movie">{{editedMovie.title | titlecase }}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Title</span>
+                </div>
+                <input #newTitle type="text" class="form-control" placeholder="New Title" value="{{editedMovie.title}}">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Year</span>
+                </div>
+                <input #newYear type="number" class="form-control" placeholder="New Year" value="{{editedMovie.year}}">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Runtime</span>
+                </div>
+                <input #newRuntime type="text" class="form-control" placeholder="New Runtime" value="{{editedMovie.runtime}}">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Genre</span>
+                </div>
+                <input #newGenre type="text" class="form-control" placeholder="New Genre" value="{{editedMovie.genre}}">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon3">Director</span>
+                </div>
+                <input #newDirector type="text" class="form-control" placeholder="New Director" value="{{editedMovie.director}}">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editMovie(editedMovie.id, newTitle.value, newYear.value, newRuntime.value, newGenre.value, newDirector.value)">Save
+                changes</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Modal -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete Movie" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="Delete Movie">{{editedMovie.title | titlecase }}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this movie?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteMovie(editedMovie.id)">Delete!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-light" matTooltip="Query for 10 more movies with this title" (click)="showMoreMovies()">Show
+    More...</button>
+</div>

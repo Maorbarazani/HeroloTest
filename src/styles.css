@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.btn {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+}
+
+.btn-dark {
+    background-color: #EDEAF1;
+    border-color: rgb(255, 255, 255);
+    border-width: 0px;
+    width: 10%;
+}
+
+.btn-dark:hover {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+    border-width: 0px;
+}
+
+.btn-outline-light {
+    color: white;
+    border-color: white;
+    border-width: 0px;
+    font-size: 120%;
+    padding: 6px 12px;
+}
+
+.btn-outline-light:hover {
+    color: #7744A1;
+    text-emphasis: bold;
+    border-color: white;
+    background-color: white;
+}
+
+.btn-light {
+    color: white;
+    background-color: #7744A1;
+    border-color: #7744A1;
+}
+
+.btn-light:hover {
+    color: white;
+    background-color: #9B58B5;
+    border-color: #7744A1;
+}
+
+.btn-warning {
+    color: white;
+}
+
+.btn-warning:hover {
+    color: white;
+}
+
+.card {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, .0);
+    border-width: 1.5px;
+    border-radius: 10px;
+    border-style: dashed;
+    border-color: rgb(180, 180, 180);
+}
+
+body {
+    background-color: #EDEAF1;
+    background-image: linear-gradient(to right, #EDEAF1, white, #EDEAF1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*
+    main #7744A1
+    light purple #9B58B5
+    dark purple #533072
+    grey #EDEAF1
+*/
