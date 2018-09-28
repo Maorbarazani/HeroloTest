@@ -122,7 +122,6 @@ export class HomeComponent implements OnInit {
   ) {
     newTitle = newTitle.trim();
     newTitle = this.charsPipe.transform(newTitle);
-    console.log(newTitle);
     newRuntime = newRuntime.trim();
     newGenre = newGenre.trim();
     newDirector = newDirector.trim();
